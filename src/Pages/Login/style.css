@@ -1,0 +1,24 @@
+.login-container {
+    min-width: 300px; 
+    max-width: 450px;
+    align-self: center;   
+}
+
+.login-container h1 {
+    margin: 15px 0;
+    font-size: 45px;
+}
+
+.login-container h2 {
+    margin: 5px 0;
+}
+
+.login-container h3 {
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.login-container img {
+    max-width: 80%;
+    padding: 50px;
+}

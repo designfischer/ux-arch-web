@@ -1,0 +1,35 @@
+.newint {
+    position: relative;
+}
+
+.newimg {
+  height: 300px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.newform form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+  margin-top: 15px;
+}
+
+.newform form input {
+  height: 45px;
+  border: none;
+  font: 400 15px "Roboto", sans-serif;
+
+  padding: 0 15px;
+}
+
+.newinputstext {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newinputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}

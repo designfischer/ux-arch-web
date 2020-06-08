@@ -1,0 +1,19 @@
+.container {
+    background:#f5f5f0;
+    width: 100vw;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    background: #fff;
+    max-width: 900px;
+    min-height: 60vh;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    margin: 45px;
+    padding: 45px;
+    display: relative;
+}

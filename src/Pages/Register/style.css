@@ -1,0 +1,24 @@
+.register-container {
+    min-width: 300px; 
+    max-width: 450px;
+    align-self: center;   
+}
+
+.register-container h1 {
+    margin: 15px 0;
+    font-size: 45px;
+}
+
+.register-container h2 {
+    margin: 5px 0;
+}
+
+.register-container h3 {
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.register-container img {
+    max-width: 80%;
+    padding: 50px;
+}

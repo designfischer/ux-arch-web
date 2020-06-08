@@ -1,0 +1,20 @@
+.home-container {
+    min-width: 300px; 
+    max-width: 450px;
+    align-self: center;   
+}
+
+.home-container h1 {
+    margin: 15px 0;
+    font-size: 45px;
+}
+
+.home-container h3 {
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.home-container img {
+    max-width: 80%;
+    padding: 50px;
+}

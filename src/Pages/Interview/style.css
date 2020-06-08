@@ -1,0 +1,15 @@
+.interview-page {
+    position: relative;
+}
+
+.interview-container { 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.interview-container a {
+    color: #FFF;
+    text-decoration: none;
+}
+

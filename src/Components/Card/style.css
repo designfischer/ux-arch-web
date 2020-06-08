@@ -1,0 +1,64 @@
+.card {
+  max-width: 300px;
+  min-width: 250px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-top: 15px;
+  transition: 0.5s;
+  background: #FFF;
+}
+
+.card-img {
+  height: 200px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.card-header {
+  padding: 10px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.card-title p {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.card-score p {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: end;
+}
+
+.card-body {
+  padding: 15px 30px;  
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-gap: 15px;
+}
+
+.card-info p:first-child {
+  font-size: 8px;
+}
+
+.card-info p:last-child {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+}
+
+.button-card-close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 25px;
+  top: -30px;
+  line-height: 10px;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 5, 0.3);
+}

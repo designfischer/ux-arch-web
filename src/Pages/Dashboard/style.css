@@ -1,0 +1,7 @@
+.dashboard-container {
+    max-width: 300px;
+}
+
+.dashboard-container img {    
+    max-height: 150px;    
+}

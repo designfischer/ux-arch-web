@@ -3,8 +3,7 @@ import { FiTrash } from "react-icons/fi";
 
 import "./style.css";
 
-function Card({
-  key,
+function Card({  
   title,
   score,
   fenestration,
@@ -15,10 +14,11 @@ function Card({
   furniture,
   people,
   image,
+  handleDelete
 }) {
   return (
-    <div className="card" key={key}>
-      <button className="button-card-close"><FiTrash/></button>
+    <div className="card">
+      <button className="button-card-close" onClick={handleDelete}><FiTrash/></button>
       <div className="card-img" style={{ backgroundImage: `url(${image})` }} />
       <div className="card-header">
         <div className="card-title">

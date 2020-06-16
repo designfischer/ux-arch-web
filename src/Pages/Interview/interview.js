@@ -9,7 +9,7 @@ import "./style.css";
 
 function Interview() {
   const user_id = localStorage.getItem('user_id')
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([])  
 
   useEffect(()=>{
     loadProjects()
@@ -17,10 +17,11 @@ function Interview() {
 
   async function loadProjects() {
     const data = await api.get(`/project/${user_id}`)
-    const projectsData = data.data
-    setProjects(projectsData)        
-  }
-
+    const projectsData = data.data 
+    const filteredProjects = projectsData.filter(project=>project.category.includes("train")) 
+    setProjects(filteredProjects);         
+  }  
+  
   async function handleDelete(_id) {
     try{
       const dataD = await api.delete(`/project/${_id}`, { headers: { user_id: user_id } })

@@ -8,6 +8,7 @@ import Dashboard from './Pages/Dashboard/dashboard'
 import Interview from './Pages/Interview/interview'
 import Projects from './Pages/Projects/projects'
 import NewInterview from './Pages/NewInterview/newinterview'
+import NewPrediction from './Pages/NewPrediction/newprediction'
 
 function Routes() {
     return (
@@ -20,6 +21,7 @@ function Routes() {
                 <Route path="/interview" exact component={Interview} />
                 <Route path="/projects" exact component={Projects} />
                 <Route path="/newinterview" exact component={NewInterview} />
+                <Route path="/newprediction" exact component={NewPrediction} />
             </Switch>        
         </BrowserRouter>       
     )

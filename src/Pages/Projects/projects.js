@@ -23,6 +23,17 @@ function Interview() {
     setProjects(filteredProjects);
   }
 
+  async function handleDelete(_id) {
+    try{
+      const dataD = await api.delete(`/project/${_id}`, { headers: { user_id: user_id } })
+      console.log(dataD)
+      alert('Item deletado com sucesso')
+      setProjects(projects.filter(project=>project._id !== _id))
+    } catch(err) {
+      alert('Falha ao deletar item')
+    }
+  }
+
   return (
     <Layout>
       <div className="interview-page">
@@ -50,8 +61,7 @@ function Interview() {
               furniture={project.furniture}
               people={project.people}
               image={project.url}
-              handleDelete={() => {                
-              }}
+              handleDelete={()=>{handleDelete(project._id)}}
             />
           ))}
         </div>

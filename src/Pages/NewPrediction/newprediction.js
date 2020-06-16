@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import Layout from "../../Components/Layout/layout";
@@ -6,14 +6,36 @@ import api from "../../Services/api";
 
 import "./style.css";
 
-function NewInterview() {
+const brain = require('brain.js');
+
+function NewInterview() { 
+
+  useEffect(()=>{
+    async function loadTrainingData() {
+      await loadProjects()      
+    }
+    loadTrainingData()
+  },[])
+
+  async function loadProjects() {
+    const data = await api.get(`/project/${user_id}`);
+    const projectsData = data.data;    
+    const filteredProjects = projectsData.filter(project=>project.category.includes("train"))
+    setTrainProjects(filteredProjects)    
+  }
+
+  const user_id = localStorage.getItem("user_id");
+  const [trainProjects, setTrainProjects] = useState([])
+  const [trainingValues, setTrainingValues] = useState([]);
+  const [result, setResult] = useState([])
+
   const _id = localStorage.getItem("user_id");
   const history = useHistory();
 
   const [url, setUrl] = useState(
     "https://baladasegura.rs.gov.br/themes/modelo-institucional/images/outros/GD_imgSemImagem.png"
   );
-  const [score, setScore] = useState(5);
+  const [score, setScore] = useState([]);
   const [name, setName] = useState("");
   const [fenestration, setFenestration] = useState(0.5);
   const [size, setSize] = useState(0.5);
@@ -50,6 +72,29 @@ function NewInterview() {
       alert("Erro ao cadastrar projeto, tente novamente");
     }
   }
+
+  function trainModel(e) {   
+    e.preventDefault()    
+    setTrainingValues(trainProjects.map(project=> ({ input: [
+      parseInt(project.fenestration),
+      parseInt(project.size),
+      parseInt(project.light),
+      parseInt(project.color),
+      parseInt(project.material),
+      parseInt(project.furniture),
+      parseInt(project.people)
+    ], output: [parseFloat(((project.score)*0.1).toFixed(1))]})))
+  }
+
+  function predictValue(e) {
+    e.preventDefault()
+    const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
+    net.train(trainingValues);
+    setResult(net.run([fenestration,size,light,color,material,furniture,people]))
+  }  
+
+  console.log(trainingValues)
+  console.log(result)
 
   return (
     <Layout>
@@ -259,15 +304,15 @@ function NewInterview() {
                   type="radio"
                   id="aberto"
                   name="people"
-                  onChange={(e) => setFurniture(1)}
+                  onChange={(e) => setPeople(1)}
                 />
               </div>
               <div className="newinputs">
-                <h1>Nota: 9</h1>
+                <h1>Nota: {(result*10).toFixed(1)}</h1>
               </div>           
             </div>            
-            <button>Prever</button>
-            
+            <button onClick={trainModel}>Treinar</button>
+            <button onClick={predictValue}>Prever</button>
             <button type="submit">Cadastrar</button>
           </form>
         </div>

@@ -52,6 +52,10 @@ function NewInterview() {
       parseInt(project.people)
     ], output: [parseFloat(((project.score)*0.1).toFixed(1))]})))    
   },[trainProjects])
+
+  useEffect(()=>{
+    console.log('dados prontos')
+  },[trainingValues])
   
   console.log(trainingValues)
 
@@ -78,7 +82,7 @@ function NewInterview() {
       alert("Projeto adicionado com sucesso");
       history.push("/projects");
     } catch (err) {
-      alert("Erro ao cadastrar projeto, tente novamente");
+      alert("Erro ao cadastrar projeto, preencha todos os campos e clique no botão prever antes de gravar");
     }
   }  
 

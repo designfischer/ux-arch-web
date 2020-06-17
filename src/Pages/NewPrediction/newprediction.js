@@ -9,21 +9,6 @@ import "./style.css";
 const brain = require('brain.js');
 
 function NewInterview() { 
-
-  useEffect(()=>{
-    async function loadTrainingData() {
-      await loadProjects()      
-    }
-    loadTrainingData()
-  },[])
-
-  async function loadProjects() {
-    const data = await api.get(`/project/${user_id}`);
-    const projectsData = data.data;    
-    const filteredProjects = projectsData.filter(project=>project.category.includes("train"))
-    setTrainProjects(filteredProjects)    
-  }
-
   const user_id = localStorage.getItem("user_id");
   const [trainProjects, setTrainProjects] = useState([])
   const [trainingValues, setTrainingValues] = useState([]);
@@ -34,8 +19,7 @@ function NewInterview() {
 
   const [url, setUrl] = useState(
     "https://baladasegura.rs.gov.br/themes/modelo-institucional/images/outros/GD_imgSemImagem.png"
-  );
-  const [score, setScore] = useState([]);
+  );  
   const [name, setName] = useState("");
   const [fenestration, setFenestration] = useState(0.5);
   const [size, setSize] = useState(0.5);
@@ -45,6 +29,31 @@ function NewInterview() {
   const [furniture, setFurniture] = useState(0.5);
   const [people, setPeople] = useState(0.5);
   const [category, setCategory] = useState("test");
+
+  useEffect(()=>{    
+    loadProjects()      
+  },[])
+
+  async function loadProjects() {
+    const data = await api.get(`/project/${user_id}`);
+    const projectsData = data.data;    
+    const filteredProjects = projectsData.filter(project=>project.category.includes("train"))
+    setTrainProjects(filteredProjects)    
+  }
+
+  useEffect(()=>{
+    setTrainingValues(trainProjects.map(project=> ({ input: [
+      parseInt(project.fenestration),
+      parseInt(project.size),
+      parseInt(project.light),
+      parseInt(project.color),
+      parseInt(project.material),
+      parseInt(project.furniture),
+      parseInt(project.people)
+    ], output: [parseFloat(((project.score)*0.1).toFixed(1))]})))    
+  },[trainProjects])
+  
+  console.log(trainingValues)
 
   async function newProjectHandler(e) {
     e.preventDefault();
@@ -71,21 +80,7 @@ function NewInterview() {
     } catch (err) {
       alert("Erro ao cadastrar projeto, tente novamente");
     }
-  }
-
-  function trainModel(e) {   
-    e.preventDefault()    
-    setTrainingValues(trainProjects.map(project=> ({ input: [
-      parseInt(project.fenestration),
-      parseInt(project.size),
-      parseInt(project.light),
-      parseInt(project.color),
-      parseInt(project.material),
-      parseInt(project.furniture),
-      parseInt(project.people)
-    ], output: [parseFloat(((project.score)*0.1).toFixed(1))]})))
-    alert('O sistema está pronto para prever os resultados')
-  }
+  }  
 
   function predictValue(e) {
     e.preventDefault()
@@ -94,10 +89,7 @@ function NewInterview() {
     const pResult = net.run([fenestration,size,light,color,material,furniture,people])
     const pResultInt = pResult[0]*10
     setResult(parseFloat(pResultInt).toFixed(2))
-  }  
-
-  console.log(trainingValues)
-  console.log(result)
+  } 
 
   return (
     <Layout>
@@ -314,7 +306,7 @@ function NewInterview() {
                 <h1>Nota: {result}</h1>
               </div>           
             </div>            
-            <button onClick={trainModel}>Treinar</button>
+            
             <button onClick={predictValue}>Prever</button>
             <button type="submit">Cadastrar</button>
           </form>

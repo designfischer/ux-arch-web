@@ -103,7 +103,7 @@ function NewInterview() {
     <Layout>
       <div className="newint">
         <button className="button-close">
-          <Link to="/interview">
+          <Link to="/projects">
             <FiArrowLeft color="#FFF" />
           </Link>
         </button>

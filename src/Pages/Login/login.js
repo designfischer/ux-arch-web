@@ -45,6 +45,7 @@ function Login() {
                                 type="text" 
                                 id="email" 
                                 placeholder="Email" 
+                                required
                                 value={email} 
                                 onChange={e=>setEmail(e.target.value)}
                             />
@@ -55,6 +56,7 @@ function Login() {
                                 type="password" 
                                 id="password" 
                                 placeholder="Senha" 
+                                required
                                 value={password} 
                                 onChange={e=>setPassword(e.target.value)}
                             />

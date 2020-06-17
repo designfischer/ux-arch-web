@@ -6,6 +6,7 @@ import api from "../../Services/api";
 import Layout from "../../Components/Layout/layout";
 import Card from "../../Components/Card/card";
 import "./style.css";
+import Loading from '../../Assets/loading.gif'
 
 function Interview() {
   const user_id = localStorage.getItem("user_id");
@@ -44,9 +45,10 @@ function Interview() {
         </button>
         <div className="interview-container">
           <button>
-            <Link to="newprediction">Prever Projeto</Link>
+            <Link to="newprediction">Adicionar Projeto</Link>
           </button>
         </div>
+        {projects.length === 0 ? <img src={Loading} alt=""/> :
         <div className="interview-container">
           {projects.map((project) => (
             <Card
@@ -65,6 +67,7 @@ function Interview() {
             />
           ))}
         </div>
+        }
       </div>
     </Layout>
   );

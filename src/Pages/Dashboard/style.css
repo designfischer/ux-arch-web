@@ -5,3 +5,12 @@
 .dashboard-container img {    
     max-height: 150px;    
 }
+
+.dashboard-container p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dashboard-container h3 {
+    margin-bottom: 15px;
+}

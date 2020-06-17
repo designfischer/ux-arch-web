@@ -51,7 +51,7 @@ function NewInterview() {
     const data = {
       category,
       name,
-      score,
+      score: result,
       url,
       fenestration,
       size,
@@ -84,13 +84,16 @@ function NewInterview() {
       parseInt(project.furniture),
       parseInt(project.people)
     ], output: [parseFloat(((project.score)*0.1).toFixed(1))]})))
+    alert('O sistema está pronto para prever os resultados')
   }
 
   function predictValue(e) {
     e.preventDefault()
     const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
     net.train(trainingValues);
-    setResult(net.run([fenestration,size,light,color,material,furniture,people]))
+    const pResult = net.run([fenestration,size,light,color,material,furniture,people])
+    const pResultInt = pResult[0]*10
+    setResult(parseFloat(pResultInt).toFixed(2))
   }  
 
   console.log(trainingValues)
@@ -308,7 +311,7 @@ function NewInterview() {
                 />
               </div>
               <div className="newinputs">
-                <h1>Nota: {(result*10).toFixed(1)}</h1>
+                <h1>Nota: {result}</h1>
               </div>           
             </div>            
             <button onClick={trainModel}>Treinar</button>

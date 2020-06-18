@@ -13,16 +13,15 @@ function Interview() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    async function loadProjects() {
+      const data = await api.get(`/project/${user_id}`);
+      const projectsData = data.data;
+      console.log(projectsData)
+      const filteredProjects = projectsData.filter(project=>project.category.includes("test")) 
+      setProjects(filteredProjects);
+    }
     loadProjects();
-  }, []);
-
-  async function loadProjects() {
-    const data = await api.get(`/project/${user_id}`);
-    const projectsData = data.data;
-    console.log(projectsData)
-    const filteredProjects = projectsData.filter(project=>project.category.includes("test")) 
-    setProjects(filteredProjects);
-  }
+  }, [user_id]);  
 
   async function handleDelete(_id) {
     try{

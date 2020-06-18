@@ -14,15 +14,14 @@ function Dashboard() {
     const history = useHistory()
 
     useEffect(()=>{
+        async function loadProjects() {
+            const data = await api.get(`/project/${user_id}`)
+            const projectsData = data.data 
+            const filteredProjects = projectsData.filter(project=>project.category.includes("train"))  
+            setProjects(filteredProjects);  
+        }   
     loadProjects()
-    },[])
-    
-    async function loadProjects() {
-        const data = await api.get(`/project/${user_id}`)
-        const projectsData = data.data 
-        const filteredProjects = projectsData.filter(project=>project.category.includes("train"))  
-        setProjects(filteredProjects);  
-    }     
+    },[user_id])     
      
     function logoutHandler() {
         localStorage.clear()

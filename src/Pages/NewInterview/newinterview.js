@@ -22,7 +22,7 @@ function NewInterview() {
   const [material, setMaterial] = useState(0.5)
   const [furniture, setFurniture] = useState(0.5)
   const [people, setPeople] = useState(0.5)
-  const [category, setCategory] = useState('train')
+  const [category] = useState('train')
 
   async function newProjectHandler(e){
     e.preventDefault()
@@ -32,6 +32,7 @@ function NewInterview() {
       console.log(responseData)
       alert('Projeto adicionado com sucesso')
       history.push('/interview')
+      
     } catch(err) {
       alert('Erro ao cadastrar projeto, tente novamente')
     }    

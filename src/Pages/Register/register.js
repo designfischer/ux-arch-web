@@ -22,7 +22,7 @@ function Register() {
         }
         const data = { email, password }
         try {
-            const resData = await api.post('user', data)
+            await api.post('user', data)
             alert('Cadastro realizado com sucesso. Não se esqueça de anotar seu login e senha.')
             history.push('/login')
         } catch(err) {

@@ -28,18 +28,17 @@ function NewInterview() {
   const [material, setMaterial] = useState(0.5);
   const [furniture, setFurniture] = useState(0.5);
   const [people, setPeople] = useState(0.5);
-  const [category, setCategory] = useState("test");
+  const [category] = useState("test");
 
-  useEffect(()=>{    
+  useEffect(()=>{   
+    async function loadProjects() {
+      const data = await api.get(`/project/${user_id}`);
+      const projectsData = data.data;    
+      const filteredProjects = projectsData.filter(project=>project.category.includes("train"))
+      setTrainProjects(filteredProjects)    
+    } 
     loadProjects()      
-  },[])
-
-  async function loadProjects() {
-    const data = await api.get(`/project/${user_id}`);
-    const projectsData = data.data;    
-    const filteredProjects = projectsData.filter(project=>project.category.includes("train"))
-    setTrainProjects(filteredProjects)    
-  }
+  },[user_id]) 
 
   useEffect(()=>{
     setTrainingValues(trainProjects.map(project=> ({ input: [

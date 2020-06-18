@@ -13,15 +13,14 @@ function Interview() {
   const [projects, setProjects] = useState([])  
 
   useEffect(()=>{
+    async function loadProjects() {
+      const data = await api.get(`/project/${user_id}`)
+      const projectsData = data.data 
+      const filteredProjects = projectsData.filter(project=>project.category.includes("train")) 
+      setProjects(filteredProjects);         
+    }  
     loadProjects()
-  },[])
-
-  async function loadProjects() {
-    const data = await api.get(`/project/${user_id}`)
-    const projectsData = data.data 
-    const filteredProjects = projectsData.filter(project=>project.category.includes("train")) 
-    setProjects(filteredProjects);         
-  }  
+  },[user_id])  
   
   async function handleDelete(_id) {
     try{
@@ -47,7 +46,7 @@ function Interview() {
             <Link to="newinterview">Nova Entrevista</Link>
           </button>
         </div>
-        {projects.length == 0 ? <img src={Loading} alt=""/> : 
+        {projects.length === 0 ? <img src={Loading} alt=""/> : 
         <div className="interview-container">
           {projects.map(project => 
             <Card   
